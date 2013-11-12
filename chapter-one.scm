@@ -131,7 +131,33 @@
         ((= y 1) 2)
         (else (A (- x 1)
                  (A x (- y 1))))))
-(A 1 10)
-(A 2 4)
-(A 3 3)
 
+;; 1.11
+
+(define (f n)
+  (if (< n 3)
+      n
+      (+ (f (- n 1))
+         (* 2 (f (- n 2)))
+         (* 3 (f (- n 3))))))
+
+;;iterative
+
+(define (f-iter a b c n)
+  (if (< n 3)
+      a
+      (f-iter (+ a (* 2 b) (* 3 c))
+              a
+              b
+              (- n 1))))
+
+(define (f* n)
+  (f-iter 2 1 0 n))
+
+;;1.12
+
+(define (pascal n r)
+  (cond ((or (= r 0) (= n 0)) 1)
+        ((= n r) 1)
+        ((+ (pascal (- n 1) (- r 1))
+            (pascal (- n 1) r)))))
